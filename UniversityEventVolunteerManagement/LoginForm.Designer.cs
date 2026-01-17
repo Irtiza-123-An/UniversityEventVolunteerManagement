@@ -34,18 +34,20 @@
             lblpassword = new Label();
             txtPassword = new TextBox();
             btnlogin = new Button();
+            linkLabel1 = new LinkLabel();
             SuspendLayout();
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitle.Location = new Point(328, 68);
+            lblTitle.Location = new Point(360, 61);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(80, 26);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Login:";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+            lblTitle.Click += lblTitle_Click;
             // 
             // lblUsername
             // 
@@ -87,7 +89,7 @@
             // 
             btnlogin.BackColor = SystemColors.ControlLightLight;
             btnlogin.Font = new Font("Times New Roman", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnlogin.Location = new Point(356, 268);
+            btnlogin.Location = new Point(360, 279);
             btnlogin.Name = "btnlogin";
             btnlogin.Size = new Size(75, 23);
             btnlogin.TabIndex = 5;
@@ -95,11 +97,23 @@
             btnlogin.UseVisualStyleBackColor = false;
             btnlogin.Click += btnlogin_Click;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(291, 403);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(207, 15);
+            linkLabel1.TabIndex = 6;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Don't have an account? Register Here!";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(linkLabel1);
             Controls.Add(btnlogin);
             Controls.Add(txtPassword);
             Controls.Add(lblpassword);
@@ -120,5 +134,6 @@
         private Label lblpassword;
         private TextBox txtPassword;
         private Button btnlogin;
+        private LinkLabel linkLabel1;
     }
 }
