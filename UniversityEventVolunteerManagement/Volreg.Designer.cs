@@ -100,6 +100,7 @@
             // 
             // txtPassword
             // 
+            txtPassword.BackColor = SystemColors.ButtonHighlight;
             txtPassword.Location = new Point(267, 298);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
