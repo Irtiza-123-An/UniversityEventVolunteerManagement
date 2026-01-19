@@ -17,7 +17,7 @@ namespace UniversityEventVolunteerManagement
             InitializeComponent();
         }
 
-        
+
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -38,6 +38,11 @@ namespace UniversityEventVolunteerManagement
         {
             string studentName = txtStudentName.Text;
             MessageBox.Show("Student " + studentName + " has been registered successfully!");
+        }
+
+        private void dgvStudent_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
