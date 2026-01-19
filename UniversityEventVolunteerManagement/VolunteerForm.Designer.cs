@@ -31,13 +31,6 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             dgvStudent = new DataGridView();
-            colID = new DataGridViewTextBoxColumn();
-            ColName = new DataGridViewTextBoxColumn();
-            ColDept = new DataGridViewTextBoxColumn();
-            ColSems = new DataGridViewTextBoxColumn();
-            colPhoneNumber = new DataGridViewTextBoxColumn();
-            ColEmail = new DataGridViewTextBoxColumn();
-            ColSkills = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
             txtSemester = new TextBox();
             btnAddStudent = new Button();
@@ -60,6 +53,14 @@
             ColTaskName = new DataGridViewTextBoxColumn();
             colDueTime = new DataGridViewTextBoxColumn();
             ColStatus = new DataGridViewTextBoxColumn();
+            colID = new DataGridViewTextBoxColumn();
+            ColName = new DataGridViewTextBoxColumn();
+            ColDept = new DataGridViewTextBoxColumn();
+            ColSems = new DataGridViewTextBoxColumn();
+            colPhoneNumber = new DataGridViewTextBoxColumn();
+            ColEmail = new DataGridViewTextBoxColumn();
+            ColSkills = new DataGridViewTextBoxColumn();
+            btnActionColumn = new DataGridViewButtonColumn();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStudent).BeginInit();
@@ -92,50 +93,16 @@
             // 
             // dgvStudent
             // 
+            dgvStudent.AllowUserToOrderColumns = true;
             dgvStudent.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvStudent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudent.Columns.AddRange(new DataGridViewColumn[] { colID, ColName, ColDept, ColSems, colPhoneNumber, ColEmail, ColSkills });
+            dgvStudent.Columns.AddRange(new DataGridViewColumn[] { colID, ColName, ColDept, ColSems, colPhoneNumber, ColEmail, ColSkills, btnActionColumn });
             dgvStudent.Dock = DockStyle.Fill;
             dgvStudent.Location = new Point(3, 3);
             dgvStudent.Name = "dgvStudent";
             dgvStudent.Size = new Size(747, 357);
             dgvStudent.TabIndex = 0;
             dgvStudent.CellContentClick += dgvStudent_CellContentClick;
-            // 
-            // colID
-            // 
-            colID.HeaderText = "Student ID";
-            colID.Name = "colID";
-            // 
-            // ColName
-            // 
-            ColName.HeaderText = "Student Name";
-            ColName.Name = "ColName";
-            // 
-            // ColDept
-            // 
-            ColDept.HeaderText = "Department";
-            ColDept.Name = "ColDept";
-            // 
-            // ColSems
-            // 
-            ColSems.HeaderText = "Semester";
-            ColSems.Name = "ColSems";
-            // 
-            // colPhoneNumber
-            // 
-            colPhoneNumber.HeaderText = "Phone Number";
-            colPhoneNumber.Name = "colPhoneNumber";
-            // 
-            // ColEmail
-            // 
-            ColEmail.HeaderText = "Email";
-            ColEmail.Name = "ColEmail";
-            // 
-            // ColSkills
-            // 
-            ColSkills.HeaderText = "Skills";
-            ColSkills.Name = "ColSkills";
             // 
             // tabPage2
             // 
@@ -331,6 +298,46 @@
             ColStatus.HeaderText = "Status";
             ColStatus.Name = "ColStatus";
             // 
+            // colID
+            // 
+            colID.HeaderText = "Student ID";
+            colID.Name = "colID";
+            // 
+            // ColName
+            // 
+            ColName.HeaderText = "Student Name";
+            ColName.Name = "ColName";
+            // 
+            // ColDept
+            // 
+            ColDept.HeaderText = "Department";
+            ColDept.Name = "ColDept";
+            // 
+            // ColSems
+            // 
+            ColSems.HeaderText = "Semester";
+            ColSems.Name = "ColSems";
+            // 
+            // colPhoneNumber
+            // 
+            colPhoneNumber.HeaderText = "Phone Number";
+            colPhoneNumber.Name = "colPhoneNumber";
+            // 
+            // ColEmail
+            // 
+            ColEmail.HeaderText = "Email";
+            ColEmail.Name = "ColEmail";
+            // 
+            // ColSkills
+            // 
+            ColSkills.HeaderText = "Skills";
+            ColSkills.Name = "ColSkills";
+            // 
+            // btnActionColumn
+            // 
+            btnActionColumn.HeaderText = "Complete";
+            btnActionColumn.Name = "btnActionColumn";
+            // 
             // VolunteerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -370,6 +377,12 @@
         private TextBox txtStudentID;
         private Button btnAddStudent;
         private TextBox txtSemester;
+        private TabPage tabPage3;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn ColTaskID;
+        private DataGridViewTextBoxColumn ColTaskName;
+        private DataGridViewTextBoxColumn colDueTime;
+        private DataGridViewTextBoxColumn ColStatus;
         private DataGridViewTextBoxColumn colID;
         private DataGridViewTextBoxColumn ColName;
         private DataGridViewTextBoxColumn ColDept;
@@ -377,11 +390,6 @@
         private DataGridViewTextBoxColumn colPhoneNumber;
         private DataGridViewTextBoxColumn ColEmail;
         private DataGridViewTextBoxColumn ColSkills;
-        private TabPage tabPage3;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn ColTaskID;
-        private DataGridViewTextBoxColumn ColTaskName;
-        private DataGridViewTextBoxColumn colDueTime;
-        private DataGridViewTextBoxColumn ColStatus;
+        private DataGridViewButtonColumn btnActionColumn;
     }
 }
