@@ -100,7 +100,7 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(291, 403);
+            linkLabel1.Location = new Point(309, 403);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(207, 15);
             linkLabel1.TabIndex = 6;

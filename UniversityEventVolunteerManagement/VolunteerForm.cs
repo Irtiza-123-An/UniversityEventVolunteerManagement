@@ -16,5 +16,28 @@ namespace UniversityEventVolunteerManagement
         {
             InitializeComponent();
         }
+
+        
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            string studentName = txtStudentName.Text;
+            MessageBox.Show("Student " + studentName + " has been registered successfully!");
+        }
     }
 }

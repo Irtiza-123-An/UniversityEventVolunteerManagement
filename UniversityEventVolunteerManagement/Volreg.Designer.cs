@@ -131,7 +131,7 @@
             // lnklogin
             // 
             lnklogin.AutoSize = true;
-            lnklogin.Location = new Point(198, 426);
+            lnklogin.Location = new Point(210, 426);
             lnklogin.Name = "lnklogin";
             lnklogin.Size = new Size(200, 15);
             lnklogin.TabIndex = 10;
