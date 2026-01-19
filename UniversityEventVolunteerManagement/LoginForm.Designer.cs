@@ -35,63 +35,81 @@
             txtPassword = new TextBox();
             btnlogin = new Button();
             linkLabel1 = new LinkLabel();
+            panel1 = new Panel();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            panel2 = new Panel();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
+            lblTitle.BackColor = Color.Transparent;
             lblTitle.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitle.Location = new Point(360, 61);
+            lblTitle.Location = new Point(123, 93);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(80, 26);
+            lblTitle.Size = new Size(99, 26);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "Login:";
+            lblTitle.Text = "LOGIN:";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             lblTitle.Click += lblTitle_Click;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblUsername.Location = new Point(228, 156);
+            lblUsername.BackColor = Color.Transparent;
+            lblUsername.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.Location = new Point(46, 153);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(94, 22);
+            lblUsername.Size = new Size(107, 24);
             lblUsername.TabIndex = 1;
-            lblUsername.Text = "username:";
+            lblUsername.Text = "Username:";
             lblUsername.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(328, 155);
+            txtUsername.BackColor = SystemColors.Menu;
+            txtUsername.Location = new Point(155, 154);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(197, 23);
+            txtUsername.Size = new Size(133, 23);
             txtUsername.TabIndex = 2;
+            txtUsername.TextChanged += txtUsername_TextChanged;
             // 
             // lblpassword
             // 
             lblpassword.AutoSize = true;
-            lblpassword.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblpassword.Location = new Point(227, 202);
+            lblpassword.BackColor = Color.Transparent;
+            lblpassword.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblpassword.Location = new Point(46, 205);
             lblpassword.Name = "lblpassword";
-            lblpassword.Size = new Size(95, 22);
+            lblpassword.Size = new Size(103, 24);
             lblpassword.TabIndex = 3;
             lblpassword.Text = "Password:";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(330, 205);
+            txtPassword.BackColor = SystemColors.Menu;
+            txtPassword.Location = new Point(155, 205);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(195, 23);
+            txtPassword.Size = new Size(133, 23);
             txtPassword.TabIndex = 4;
             txtPassword.UseSystemPasswordChar = true;
+            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // btnlogin
             // 
-            btnlogin.BackColor = SystemColors.ControlLightLight;
-            btnlogin.Font = new Font("Times New Roman", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnlogin.Location = new Point(360, 279);
+            btnlogin.BackColor = Color.Gold;
+            btnlogin.FlatAppearance.BorderSize = 0;
+            btnlogin.FlatStyle = FlatStyle.Flat;
+            btnlogin.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnlogin.ForeColor = SystemColors.ControlText;
+            btnlogin.Location = new Point(132, 261);
             btnlogin.Name = "btnlogin";
-            btnlogin.Size = new Size(75, 23);
+            btnlogin.Size = new Size(80, 31);
             btnlogin.TabIndex = 5;
             btnlogin.Text = "login";
             btnlogin.UseVisualStyleBackColor = false;
@@ -100,30 +118,98 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(309, 403);
+            linkLabel1.BackColor = Color.White;
+            linkLabel1.LinkColor = Color.Black;
+            linkLabel1.Location = new Point(68, 325);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(207, 15);
             linkLabel1.TabIndex = 6;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Don't have an account? Register Here!";
+            linkLabel1.VisitedLinkColor = Color.White;
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(180, 235, 255, 255);
+            panel1.Controls.Add(lblUsername);
+            panel1.Controls.Add(linkLabel1);
+            panel1.Controls.Add(txtUsername);
+            panel1.Controls.Add(lblTitle);
+            panel1.Controls.Add(btnlogin);
+            panel1.Controls.Add(lblpassword);
+            panel1.Controls.Add(txtPassword);
+            panel1.Location = new Point(436, 47);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(336, 375);
+            panel1.TabIndex = 7;
+            panel1.Paint += panel1_Paint;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Elephant", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.WhiteSmoke;
+            label1.Location = new Point(21, 140);
+            label1.Name = "label1";
+            label1.Size = new Size(158, 38);
+            label1.TabIndex = 8;
+            label1.Text = "     AIUB \r\n";
+            label1.Click += label1_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = Properties.Resources.aiub_seeklogo;
+            pictureBox1.Location = new Point(0, 35);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(235, 92);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Elephant", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Gold;
+            label2.Location = new Point(39, 178);
+            label2.Name = "label2";
+            label2.Size = new Size(156, 31);
+            label2.TabIndex = 10;
+            label2.Text = "Event Hub";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.FromArgb(150, 30, 30, 30);
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(label1);
+            panel2.Location = new Point(12, 12);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(409, 426);
+            panel2.TabIndex = 11;
             // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources._601363886_1296678569159060_3161592934374379085_n;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(linkLabel1);
-            Controls.Add(btnlogin);
-            Controls.Add(txtPassword);
-            Controls.Add(lblpassword);
-            Controls.Add(txtUsername);
-            Controls.Add(lblUsername);
-            Controls.Add(lblTitle);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "LoginForm";
             Text = "Form1";
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -135,5 +221,10 @@
         private TextBox txtPassword;
         private Button btnlogin;
         private LinkLabel linkLabel1;
+        private Panel panel1;
+        private Label label1;
+        private PictureBox pictureBox1;
+        private Label label2;
+        private Panel panel2;
     }
 }

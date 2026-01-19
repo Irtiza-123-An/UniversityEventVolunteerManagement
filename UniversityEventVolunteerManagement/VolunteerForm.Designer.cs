@@ -85,7 +85,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(753, 374);
+            tabPage1.Size = new Size(753, 363);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Student List";
             tabPage1.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             dgvStudent.Dock = DockStyle.Fill;
             dgvStudent.Location = new Point(3, 3);
             dgvStudent.Name = "dgvStudent";
-            dgvStudent.Size = new Size(747, 368);
+            dgvStudent.Size = new Size(747, 357);
             dgvStudent.TabIndex = 0;
             dgvStudent.CellContentClick += dgvStudent_CellContentClick;
             // 
