@@ -63,6 +63,16 @@ namespace UniversityEventVolunteerManagement.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3425171 {
+            get {
+                object obj = ResourceManager.GetObject("3425171", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _492072851_1151955406731062_4674252519964508692_n {
             get {
                 object obj = ResourceManager.GetObject("492072851_1151955406731062_4674252519964508692_n", resourceCulture);
