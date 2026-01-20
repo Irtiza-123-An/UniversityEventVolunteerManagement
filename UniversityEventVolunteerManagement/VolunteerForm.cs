@@ -16,5 +16,17 @@ namespace UniversityEventVolunteerManagement
         {
             InitializeComponent();
         }
+
+        private void VolunteerForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+       
     }
 }
