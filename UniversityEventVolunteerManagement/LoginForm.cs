@@ -1,4 +1,3 @@
-
 using System.Drawing;
 using UniversityEventVolunteerManagement.Services;
 
@@ -23,7 +22,7 @@ namespace UniversityEventVolunteerManagement
         private void btnlogin_Click(object sender, EventArgs e)
         {
             UserService userService = new UserService();
-
+            // Validate credentials against your service
             var user = userService.Login(txtUsername.Text, txtPassword.Text);
 
             if (user == null)
@@ -33,6 +32,14 @@ namespace UniversityEventVolunteerManagement
             }
 
             MessageBox.Show("Login Successful! Role: " + user.Role);
+
+            // --- NAVIGATION LOGIC ---
+            // This opens the Dashboard you designed
+            VolunteerForm dashboard = new VolunteerForm();
+            dashboard.Show();
+
+            // Hides the login form so only the dashboard is visible
+            this.Hide();
         }
 
         private void lblTitle_Click(object sender, EventArgs e)

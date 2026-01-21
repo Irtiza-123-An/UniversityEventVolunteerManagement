@@ -63,6 +63,16 @@ namespace UniversityEventVolunteerManagement.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3425171 {
+            get {
+                object obj = ResourceManager.GetObject("3425171", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _492072851_1151955406731062_4674252519964508692_n {
             get {
                 object obj = ResourceManager.GetObject("492072851_1151955406731062_4674252519964508692_n", resourceCulture);
@@ -126,6 +136,26 @@ namespace UniversityEventVolunteerManagement.Properties {
         internal static System.Drawing.Bitmap ChatGPT_Image_Jan_19__2026__06_45_54_PM {
             get {
                 object obj = ResourceManager.GetObject("ChatGPT Image Jan 19, 2026, 06_45_54 PM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_ro05x7ro05x7ro05 {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_ro05x7ro05x7ro05", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
