@@ -130,6 +130,9 @@
   <data name="601363886_1296678569159060_3161592934374379085_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>601363886_1296678569159060_3161592934374379085_n.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="601363890_1296678012492449_2758781277090353722_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>601363890_1296678012492449_2758781277090353722_n.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,7 +148,7 @@
   <data name="492072851_1151955406731062_4674252519964508692_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>492072851_1151955406731062_4674252519964508692_n.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Gemini_Generated_Image_ro05x7ro05x7ro051" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Gemini_Generated_Image_ro05x7ro05x7ro05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
