@@ -19,27 +19,29 @@ namespace UniversityEventVolunteerManagement
         }
 
 
-        private void btnlogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            UserService userService = new UserService();
-            // Validate credentials against your service
-            var user = userService.Login(txtUsername.Text, txtPassword.Text);
-
-            if (user == null)
+            // These credentials should eventually be checked against your File System
+            if (txtUsername.Text == "admin" && txtPassword.Text == "123")
             {
-                MessageBox.Show("Invalid username or password");
-                return;
+                new AdminForm().Show();
+                this.Hide();
             }
-
-            MessageBox.Show("Login Successful! Role: " + user.Role);
-
-            // --- NAVIGATION LOGIC ---
-            // This opens the Dashboard you designed
-            VolunteerForm dashboard = new VolunteerForm();
-            dashboard.Show();
-
-            // Hides the login form so only the dashboard is visible
-            this.Hide();
+            else if (txtUsername.Text == "organizer" && txtPassword.Text == "1234")
+            {
+                // Opens the Organizer Dashboard you designed
+                new OrganizerForm().Show();
+                this.Hide();
+            }
+            else if (txtUsername.Text == "volunteer" && txtPassword.Text == "12345")
+            {
+                new VolunteerForm().Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Login Credentials", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void lblTitle_Click(object sender, EventArgs e)
