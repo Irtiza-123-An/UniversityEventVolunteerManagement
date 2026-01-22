@@ -1,4 +1,5 @@
-﻿namespace UniversityEventVolunteerManagement
+﻿
+namespace UniversityEventVolunteerManagement
 {
     partial class LoginForm
     {
@@ -33,7 +34,7 @@
             txtUsername = new TextBox();
             lblpassword = new Label();
             txtPassword = new TextBox();
-            btnlogin = new Button();
+            btnLogin = new Button();
             linkLabel1 = new LinkLabel();
             panel1 = new Panel();
             label1 = new Label();
@@ -100,20 +101,20 @@
             txtPassword.UseSystemPasswordChar = true;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 
-            // btnlogin
+            // btnLogin
             // 
-            btnlogin.BackColor = Color.Gold;
-            btnlogin.FlatAppearance.BorderSize = 0;
-            btnlogin.FlatStyle = FlatStyle.Flat;
-            btnlogin.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnlogin.ForeColor = SystemColors.ControlText;
-            btnlogin.Location = new Point(132, 261);
-            btnlogin.Name = "btnlogin";
-            btnlogin.Size = new Size(80, 31);
-            btnlogin.TabIndex = 5;
-            btnlogin.Text = "login";
-            btnlogin.UseVisualStyleBackColor = false;
-            btnlogin.Click += btnlogin_Click;
+            btnLogin.BackColor = Color.Gold;
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.FlatStyle = FlatStyle.Flat;
+            btnLogin.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogin.ForeColor = SystemColors.ControlText;
+            btnLogin.Location = new Point(132, 261);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(80, 31);
+            btnLogin.TabIndex = 5;
+            btnLogin.Text = "login";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // linkLabel1
             // 
@@ -136,7 +137,7 @@
             panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(txtUsername);
             panel1.Controls.Add(lblTitle);
-            panel1.Controls.Add(btnlogin);
+            panel1.Controls.Add(btnLogin);
             panel1.Controls.Add(lblpassword);
             panel1.Controls.Add(txtPassword);
             panel1.Location = new Point(436, 47);
@@ -212,6 +213,11 @@
             ResumeLayout(false);
         }
 
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private Label lblTitle;
@@ -219,7 +225,7 @@
         private TextBox txtUsername;
         private Label lblpassword;
         private TextBox txtPassword;
-        private Button btnlogin;
+        private Button btnLogin;
         private LinkLabel linkLabel1;
         private Panel panel1;
         private Label label1;
