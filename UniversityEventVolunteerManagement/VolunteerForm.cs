@@ -62,58 +62,75 @@ namespace UniversityEventVolunteerManagement
         }
 
 
-private void btnAdd_Click(object sender, EventArgs e)
-    {
-        // 1. Define the file path
-        string filePath = "StudentRecords.txt";
-
-        try
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            // 2. Simple Validation: Check if ID and Name are filled
-            if (string.IsNullOrWhiteSpace(txtStudentID.Text) || string.IsNullOrWhiteSpace(txtFullName.Text))
+            // 1. Define the file path
+            string filePath = "StudentRecords.txt";
+
+            try
             {
-                MessageBox.Show("Please fill in the Student ID and Full Name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                // 2. Simple Validation: Check if ID and Name are filled
+                if (string.IsNullOrWhiteSpace(txtStudentID.Text) || string.IsNullOrWhiteSpace(txtFullName.Text))
+                {
+                    MessageBox.Show("Please fill in the Student ID and Full Name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 3. Gather data from all TextBoxes
+                string fullName = txtFullName.Text;
+                string studentID = txtStudentID.Text;
+                string phone = txtPhoneNumber.Text;
+                string email = txtEmail.Text;
+                string semester = txtSemester.Text;
+                string dept = txtDepartment.Text; // Changed from ComboBox to TextBox
+                string skills = txtSkills.Text;
+
+                // 4. Format the line for the File System (Matches your ER attributes)
+                // Format: ID, Name, Phone, Email, Semester, Dept, Skills
+                string record = $"{studentID},{fullName},{phone},{email},{semester},{dept},{skills}";
+
+                // 5. Append to the text file
+                File.AppendAllText(filePath, record + Environment.NewLine);
+
+                // 6. Notify user
+                MessageBox.Show("Student registered successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // 7. Clear the UI
+                ClearRegistrationForm();
             }
-
-            // 3. Gather data from all TextBoxes
-            string fullName = txtFullName.Text;
-            string studentID = txtStudentID.Text;
-            string phone = txtPhoneNumber.Text;
-            string email = txtEmail.Text;
-            string semester = txtSemester.Text;
-            string dept = txtDepartment.Text; // Changed from ComboBox to TextBox
-            string skills = txtSkills.Text;
-
-            // 4. Format the line for the File System (Matches your ER attributes)
-            // Format: ID, Name, Phone, Email, Semester, Dept, Skills
-            string record = $"{studentID},{fullName},{phone},{email},{semester},{dept},{skills}";
-
-            // 5. Append to the text file
-            File.AppendAllText(filePath, record + Environment.NewLine);
-
-            // 6. Notify user
-            MessageBox.Show("Student registered successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // 7. Clear the UI
-            ClearRegistrationForm();
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        catch (Exception ex)
+
+        // Helper method to clear all TextBoxes
+        private void ClearRegistrationForm()
         {
-            MessageBox.Show("An error occurred: " + ex.Message, "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            txtFullName.Clear();
+            txtStudentID.Clear();
+            txtPhoneNumber.Clear();
+            txtEmail.Clear();
+            txtSemester.Clear();
+            txtDepartment.Clear(); // Clears the new Department TextBox
+            txtSkills.Clear();
+        }
+
+        private void btnVolunteerLogout_Click(object sender, EventArgs e)
+        {
+            // 1. Ask for confirmation so users don't logout by accident
+            DialogResult confirm = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                // 2. Create an instance of your Login Form
+                // Ensure LoginForm.cs exists in your Solution Explorer
+                LoginForm login = new LoginForm();
+
+                // 3. Show the login screen and close/hide this admin dashboard
+                login.Show();
+                this.Close(); // Use .Close() to fully release the AdminForm memory
+            }
         }
     }
-
-    // Helper method to clear all TextBoxes
-    private void ClearRegistrationForm()
-    {
-        txtFullName.Clear();
-        txtStudentID.Clear();
-        txtPhoneNumber.Clear();
-        txtEmail.Clear();
-        txtSemester.Clear();
-        txtDepartment.Clear(); // Clears the new Department TextBox
-        txtSkills.Clear();
-    }
-}
 }

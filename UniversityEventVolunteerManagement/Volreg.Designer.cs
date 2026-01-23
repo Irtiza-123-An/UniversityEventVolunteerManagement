@@ -111,7 +111,7 @@
             // txtPassword
             // 
             txtPassword.BackColor = SystemColors.ButtonHighlight;
-            txtPassword.Location = new Point(142, 238);
+            txtPassword.Location = new Point(141, 238);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.ReadOnly = true;
@@ -120,9 +120,9 @@
             // 
             // btnRegister
             // 
-            btnRegister.BackColor = Color.FromArgb(255, 255, 192);
-            btnRegister.Font = new Font("Times New Roman", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegister.Location = new Point(122, 296);
+            btnRegister.BackColor = Color.White;
+            btnRegister.Font = new Font("Times New Roman", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegister.Location = new Point(134, 296);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(107, 27);
             btnRegister.TabIndex = 8;
@@ -144,7 +144,7 @@
             // lnklogin
             // 
             lnklogin.AutoSize = true;
-            lnklogin.BackColor = Color.White;
+            lnklogin.BackColor = Color.Gainsboro;
             lnklogin.LinkColor = Color.Black;
             lnklogin.Location = new Point(86, 364);
             lnklogin.Name = "lnklogin";
@@ -168,7 +168,7 @@
             panel1.Controls.Add(btnRegister);
             panel1.Controls.Add(txtPhoneNumber);
             panel1.Controls.Add(txtPassword);
-            panel1.Location = new Point(151, 34);
+            panel1.Location = new Point(151, 30);
             panel1.Name = "panel1";
             panel1.Size = new Size(349, 391);
             panel1.TabIndex = 11;

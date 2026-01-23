@@ -90,5 +90,27 @@ namespace UniversityEventVolunteerManagement
                 MessageBox.Show("File Error: " + ex.Message);
             }
         }
+
+        private void guna2HtmlLabel5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOrganizerLogout_Click(object sender, EventArgs e)
+        {
+            // 1. Ask for confirmation so users don't logout by accident
+            DialogResult confirm = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                // 2. Create an instance of your Login Form
+                // Ensure LoginForm.cs exists in your Solution Explorer
+                LoginForm login = new LoginForm();
+
+                // 3. Show the login screen and close/hide this admin dashboard
+                login.Show();
+                this.Close(); // Use .Close() to fully release the AdminForm memory
+            }
+        }
     }
 }
