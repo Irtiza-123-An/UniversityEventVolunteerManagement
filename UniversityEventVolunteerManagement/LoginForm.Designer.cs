@@ -51,9 +51,9 @@ namespace UniversityEventVolunteerManagement
             lblTitle.AutoSize = true;
             lblTitle.BackColor = Color.Transparent;
             lblTitle.Font = new Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitle.Location = new Point(123, 93);
+            lblTitle.Location = new Point(141, 124);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(99, 26);
+            lblTitle.Size = new Size(125, 35);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "LOGIN:";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -64,9 +64,9 @@ namespace UniversityEventVolunteerManagement
             lblUsername.AutoSize = true;
             lblUsername.BackColor = Color.Transparent;
             lblUsername.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblUsername.Location = new Point(46, 153);
+            lblUsername.Location = new Point(53, 204);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(107, 24);
+            lblUsername.Size = new Size(141, 31);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Username:";
             lblUsername.TextAlign = ContentAlignment.MiddleCenter;
@@ -74,9 +74,10 @@ namespace UniversityEventVolunteerManagement
             // txtUsername
             // 
             txtUsername.BackColor = SystemColors.Menu;
-            txtUsername.Location = new Point(155, 154);
+            txtUsername.Location = new Point(199, 206);
+            txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(133, 23);
+            txtUsername.Size = new Size(151, 27);
             txtUsername.TabIndex = 2;
             txtUsername.TextChanged += txtUsername_TextChanged;
             // 
@@ -85,18 +86,19 @@ namespace UniversityEventVolunteerManagement
             lblpassword.AutoSize = true;
             lblpassword.BackColor = Color.Transparent;
             lblpassword.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblpassword.Location = new Point(46, 205);
+            lblpassword.Location = new Point(53, 273);
             lblpassword.Name = "lblpassword";
-            lblpassword.Size = new Size(103, 24);
+            lblpassword.Size = new Size(136, 31);
             lblpassword.TabIndex = 3;
             lblpassword.Text = "Password:";
             // 
             // txtPassword
             // 
             txtPassword.BackColor = SystemColors.Menu;
-            txtPassword.Location = new Point(155, 205);
+            txtPassword.Location = new Point(197, 273);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(133, 23);
+            txtPassword.Size = new Size(151, 27);
             txtPassword.TabIndex = 4;
             txtPassword.UseSystemPasswordChar = true;
             txtPassword.TextChanged += txtPassword_TextChanged;
@@ -108,9 +110,10 @@ namespace UniversityEventVolunteerManagement
             btnLogin.FlatStyle = FlatStyle.Flat;
             btnLogin.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = SystemColors.ControlText;
-            btnLogin.Location = new Point(132, 261);
+            btnLogin.Location = new Point(151, 348);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(80, 31);
+            btnLogin.Size = new Size(91, 41);
             btnLogin.TabIndex = 5;
             btnLogin.Text = "login";
             btnLogin.UseVisualStyleBackColor = false;
@@ -121,9 +124,9 @@ namespace UniversityEventVolunteerManagement
             linkLabel1.AutoSize = true;
             linkLabel1.BackColor = Color.White;
             linkLabel1.LinkColor = Color.Black;
-            linkLabel1.Location = new Point(68, 325);
+            linkLabel1.Location = new Point(78, 433);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(207, 15);
+            linkLabel1.Size = new Size(261, 20);
             linkLabel1.TabIndex = 6;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Don't have an account? Register Here!";
@@ -140,9 +143,10 @@ namespace UniversityEventVolunteerManagement
             panel1.Controls.Add(btnLogin);
             panel1.Controls.Add(lblpassword);
             panel1.Controls.Add(txtPassword);
-            panel1.Location = new Point(436, 47);
+            panel1.Location = new Point(498, 63);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(336, 375);
+            panel1.Size = new Size(384, 500);
             panel1.TabIndex = 7;
             panel1.Paint += panel1_Paint;
             // 
@@ -152,9 +156,9 @@ namespace UniversityEventVolunteerManagement
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Elephant", 21.7499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(21, 140);
+            label1.Location = new Point(24, 187);
             label1.Name = "label1";
-            label1.Size = new Size(158, 38);
+            label1.Size = new Size(197, 47);
             label1.TabIndex = 8;
             label1.Text = "     AIUB \r\n";
             label1.Click += label1_Click;
@@ -163,9 +167,10 @@ namespace UniversityEventVolunteerManagement
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.aiub_seeklogo;
-            pictureBox1.Location = new Point(0, 35);
+            pictureBox1.Location = new Point(0, 47);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(235, 92);
+            pictureBox1.Size = new Size(269, 123);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
@@ -177,9 +182,9 @@ namespace UniversityEventVolunteerManagement
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Elephant", 17.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Gold;
-            label2.Location = new Point(39, 178);
+            label2.Location = new Point(45, 237);
             label2.Name = "label2";
-            label2.Size = new Size(156, 31);
+            label2.Size = new Size(190, 38);
             label2.TabIndex = 10;
             label2.Text = "Event Hub";
             // 
@@ -189,20 +194,22 @@ namespace UniversityEventVolunteerManagement
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Location = new Point(12, 12);
+            panel2.Location = new Point(14, 16);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(409, 426);
+            panel2.Size = new Size(467, 568);
             panel2.TabIndex = 11;
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources._601363886_1296678569159060_3161592934374379085_n;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "LoginForm";
             Text = "Form1";
             panel1.ResumeLayout(false);
