@@ -1,27 +1,34 @@
 ﻿using System.Collections.Generic;
 using UniversityEventVolunteerManagement.Models;
+using UniversityEventVolunteerManagement.Backend.Services;
+using BackendUserService = UniversityEventVolunteerManagement.Backend.Services.UserService;
 
 namespace UniversityEventVolunteerManagement.Services
 {
     public class UserService
     {
-        private List<User> users = new List<User>()
+        private BackendUserService _backendUserService;
+
+        public UserService()
         {
-            new User { Username = "admin", Password = "12345", Role = "Admin" },
-            new User { Username = "organizer", Password = "1234", Role = "Organizer" },
-            new User { Username = "volunteer", Password = "123456", Role = "Volunteer" }
-        };
+            _backendUserService = new BackendUserService();
+        }
 
         public User Login(string username, string password)
         {
-            foreach (var user in users)
+            var backendUser = _backendUserService.Login(username, password);
+            if (backendUser == null)
             {
-                if (user.Username == username && user.Password == password)
-                {
-                    return user;
-                }
+                return null;
             }
-            return null;
+
+            // Map backend user to old model format for compatibility
+            return new User
+            {
+                Username = backendUser.Username,
+                Password = backendUser.Password,
+                Role = backendUser.Role
+            };
         }
     }
 }

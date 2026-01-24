@@ -7,23 +7,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Collections.Generic;
+using UniversityEventVolunteerManagement.Backend.Services;
+using UniversityEventVolunteerManagement.Backend.Models;
 
 namespace UniversityEventVolunteerManagement
 {
     public partial class AdminForm : Form
     {
+        private readonly UserService _userService;
+
+        // Improved controls
+        private NumericUpDown numOrganizerId;
+        private MaskedTextBox mtbPhone;
+        private Button btnLogout;
+
         public AdminForm()
         {
             InitializeComponent();
+            _userService = new UserService();
+
             // This resets the password char to a standard dot and ensures black text
             txtPassword.PasswordChar = '●';
             txtPassword.ForeColor = Color.Black;
-            btnOrganizerSuspend.Click += btnOrganizerSuspend_Click;
-            btnVolunteerSuspend.Click += btnVolunteerSuspend_Click_1;
-            btnStudentSuspend.Click += btnStudentSuspend_Click_1;
 
+            // Initialize improved controls
+            InitializeImprovedControls();
+
+            // Add logout button
+            InitializeLogoutButton();
+
+            // Load organizers into DataGridView
+            LoadOrganizers();
+        }
+
+        private void InitializeLogoutButton()
+        {
+            btnLogout = new Button
+            {
+                Text = "Logout",
+                Size = new Size(80, 30),
+                Location = new Point(this.ClientSize.Width - 95, 10),
+                BackColor = Color.FromArgb(220, 53, 69),
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold)
+            };
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.Click += (s, e) => this.Close();
+            this.Controls.Add(btnLogout);
+            btnLogout.BringToFront();
+        }
+
+        private void InitializeImprovedControls()
+        {
+            // Replace txtOrganizerId with NumericUpDown
+            numOrganizerId = new NumericUpDown
+            {
+                Location = txtOrganizerId.Location,
+                Size = txtOrganizerId.Size,
+                Minimum = 1,
+                Maximum = 9999,
+                Font = txtOrganizerId.Font
+            };
+            txtOrganizerId.Parent.Controls.Add(numOrganizerId);
+            txtOrganizerId.Visible = false;
+
+            // Replace txtPhone with MaskedTextBox for phone format
+            mtbPhone = new MaskedTextBox
+            {
+                Location = txtPhone.Location,
+                Size = txtPhone.Size,
+                Mask = "0000-0000000",
+                Font = txtPhone.Font
+            };
+            txtPhone.Parent.Controls.Add(mtbPhone);
+            txtPhone.Visible = false;
+        }
+
+        private void LoadOrganizers()
+        {
+            guna2DataGridView1.Rows.Clear();
+            var organizers = _userService.GetUsersByRole("Organizer");
+            foreach (var org in organizers)
+            {
+                guna2DataGridView1.Rows.Add(org.Id, org.FullName, org.Email, "", "Yes", "");
+            }
         }
 
         private void guna2HtmlLabel9_Click(object sender, EventArgs e)
@@ -38,419 +107,99 @@ namespace UniversityEventVolunteerManagement
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            // Capture data from the textboxes in your Designer
-            string fullName = txtFullName.Text; // Maps to Username or Eo_id context
-            string email = txtEmail.Text;       // Eo_email
-            string phone = txtPhoneNumber.Text;       // Eo_phone
-            string password = txtPassword.Text; // Eo_pass
+            // Capture data from the textboxes
+            string fullName = txtFullName.Text;
+            string email = txtEmail.Text;
+            string phone = mtbPhone.Text; // Use MaskedTextBox
+            string password = txtPassword.Text;
 
-            // Simple validation to ensure no empty fields
+            // Validation
             if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(phone) || string.IsNullOrWhiteSpace(password))
+                string.IsNullOrWhiteSpace(phone.Replace("-", "").Trim()) || string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Please fill in all registration fields.");
+                MessageBox.Show("Please fill in all registration fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Format the data line according to your Normalization table
-            string organizerRecord = $"{fullName},{email},{phone},{password}";
+            // Create username from email (part before @)
+            string username = email.Split('@')[0];
 
-            try
+            // Check if username already exists
+            if (_userService.GetUserByUsername(username) != null)
             {
-                // Save to the text file acting as your database
-                string filePath = "Organizers.txt";
-                File.AppendAllText(filePath, organizerRecord + Environment.NewLine);
+                MessageBox.Show("An organizer with this email already exists.", "Duplicate Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                MessageBox.Show("Event Organizer successfully registered!");
+            // Create new organizer user
+            var newOrganizer = new User
+            {
+                Username = username,
+                Password = password,
+                Role = "Organizer",
+                Email = email,
+                FullName = fullName
+            };
 
-                // Clear fields after successful save
+            bool success = _userService.AddUser(newOrganizer);
+
+            if (success)
+            {
+                MessageBox.Show($"Event Organizer '{fullName}' successfully registered!\n\nLogin credentials:\nUsername: {username}\nPassword: {password}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Clear fields and refresh grid
                 txtFullName.Clear();
                 txtEmail.Clear();
-                txtPhoneNumber.Clear();
+                mtbPhone.Clear();
                 txtPassword.Clear();
+                LoadOrganizers();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error saving data: " + ex.Message);
+                MessageBox.Show("Failed to register organizer. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnSuspend_Click(object sender, EventArgs e)
         {
-            // 1. Get the ID and Email from your textboxes
-            string targetId = txtOrganizerId.Text;
-            string targetEmail = txtEmail.Text;
-            string filePath = "Organizers.txt";
+            int targetId = (int)numOrganizerId.Value;
 
-            if (string.IsNullOrWhiteSpace(targetId))
+            // Find the organizer
+            var organizer = _userService.GetUserById(targetId);
+            if (organizer == null)
             {
-                MessageBox.Show("Please enter an Organizer ID to suspend.");
+                MessageBox.Show("Organizer ID not found in records.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            try
+            if (organizer.Role != "Organizer")
             {
-                if (File.Exists(filePath))
+                MessageBox.Show("The specified ID does not belong to an Organizer.", "Invalid Role", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Confirm suspension
+            var result = MessageBox.Show($"Are you sure you want to suspend organizer '{organizer.FullName}'?\n\nReason: {txtReason.Text}",
+                "Confirm Suspension", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                bool success = _userService.DeleteUser(targetId);
+                if (success)
                 {
-                    // 2. Read all current organizers
-                    List<string> lines = File.ReadAllLines(filePath).ToList();
-                    List<string> updatedLines = new List<string>();
-                    bool found = false;
+                    MessageBox.Show($"Organizer '{organizer.FullName}' has been suspended and removed from the system.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    foreach (string line in lines)
-                    {
-                        // Assuming data format: ID,Email,Phone,Password
-                        string[] parts = line.Split(',');
-
-                        if (parts[0] == targetId)
-                        {
-                            found = true;
-                            // By not adding this line to updatedLines, we effectively "delete" it
-                            continue;
-                        }
-                        updatedLines.Add(line);
-                    }
-
-                    if (found)
-                    {
-                        // 3. Write the updated list back to the file system
-                        File.WriteAllLines(filePath, updatedLines);
-                        MessageBox.Show($"Organizer {targetId} has been suspended/removed from the system.");
-
-                        // Clear fields
-                        txtOrganizerId.Clear();
-                        txtEmail.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Organizer ID not found in records.");
-                    }
+                    // Clear fields and refresh grid
+                    numOrganizerId.Value = 1;
+                    txtOrganizerEmail.Clear();
+                    txtReason.Clear();
+                    LoadOrganizers();
                 }
                 else
                 {
-                    MessageBox.Show("Database file not found.");
+                    MessageBox.Show("Failed to suspend organizer. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
-        private void txtStudentSearch_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnAdminLogout_Click(object sender, EventArgs e)
-        {
-
-            DialogResult confirm = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
-            {
-                // 2. Create an instance of your Login Form
-                // Ensure LoginForm.cs exists in your Solution Explorer
-                LoginForm login = new LoginForm();
-
-                // 3. Show the login screen and close/hide this admin dashboard
-                login.Show();
-                this.Close(); // Use .Close() to fully release the AdminForm memory
-            }
-        }
-
-        private void btnOrganizerSuspend_Click(object sender, EventArgs e)
-        {
-            // 1. Get the ID from the specific textbox in your design
-            string targetId = txtOrganizerId.Text.Trim();
-            string filePath = "Organizers.txt";
-
-            if (string.IsNullOrEmpty(targetId))
-            {
-                MessageBox.Show("Please enter an Organizer ID to suspend.");
-                return;
-            }
-
-            try
-            {
-                if (File.Exists(filePath))
-                {
-                    // 2. Read all lines from the text file
-                    List<string> allOrganizers = File.ReadAllLines(filePath).ToList();
-                    List<string> remainingOrganizers = new List<string>();
-                    bool isFound = false;
-
-                    foreach (string line in allOrganizers)
-                    {
-                        // Splitting by comma as per your record format
-                        string[] data = line.Split(',');
-
-                        if (data.Length > 0 && data[0] == targetId)
-                        {
-                            isFound = true;
-                            // By skipping this line, we effectively "Suspend" (delete) them
-                            continue;
-                        }
-                        remainingOrganizers.Add(line);
-                    }
-
-                    if (isFound)
-                    {
-                        // 3. Write the cleaned list back to the file
-                        File.WriteAllLines(filePath, remainingOrganizers);
-                        MessageBox.Show($"Organizer with ID {targetId} has been successfully suspended.");
-
-                        // 4. Clear the ID field
-                        txtOrganizerId.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Organizer ID not found in the database.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Database file (Organizers.txt) not found.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-        }
-
-        private void btnVolunteerSuspend_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnStudentSuspend_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVolunteerSuspend_Click_1(object sender, EventArgs e)
-        {
-            // 1. Get ID from your Student/Volunteer ID textbox
-            string targetId = txtVolunteerId.Text.Trim();
-            string filePath = "Volunteers.txt";
-
-            if (string.IsNullOrEmpty(targetId))
-            {
-                MessageBox.Show("Please enter a Volunteer ID.");
-                return;
-            }
-
-            try
-            {
-                if (File.Exists(filePath)) // If this is false, the button "does nothing"
-                {
-                    List<string> lines = File.ReadAllLines(filePath).ToList();
-                    List<string> remainingVolunteers = new List<string>();
-                    bool found = false;
-
-                    foreach (string line in lines)
-                    {
-                        string[] data = line.Split(',');
-                        if (data.Length > 0 && data[0] == targetId)
-                        {
-                            found = true;
-                            continue;
-                        }
-                        remainingVolunteers.Add(line); // MUST be inside this bracket!
-                    }
-
-                    if (found)
-                    {
-                        File.WriteAllLines(filePath, remainingVolunteers);
-                        MessageBox.Show($"Volunteer {targetId} suspended!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("ID not found in the file.");
-                    }
-                }
-                else
-                {
-                    // THIS will tell you why it "stops working"
-                    MessageBox.Show("ERROR: Volunteers.txt not found in Debug folder!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Crash error: " + ex.Message);
-            }
-        }
-
-        private void btnStudentSuspend_Click_1(object sender, EventArgs e)
-        {
-            // 1. Get Student ID from the UI
-            string targetId = txtStudentId.Text.Trim();
-            string filePath = "Students.txt";
-
-            if (string.IsNullOrEmpty(targetId))
-            {
-                MessageBox.Show("Please enter a Student ID to suspend.");
-                return;
-            }
-
-            try
-            {
-                if (File.Exists(filePath))
-                {
-                    // 2. Read and filter the student list
-                    List<string> lines = File.ReadAllLines(filePath).ToList();
-                    List<string> remainingStudents = new List<string>();
-                    bool found = false;
-
-                    foreach (string line in lines)
-                    {
-                        string[] data = line.Split(',');
-                        // Check if ID matches first column
-                        if (data.Length > 0 && data[0] == targetId)
-                        {
-                            found = true;
-                            continue; // Skip this student to "suspend" them
-                        }
-                        remainingStudents.Add(line); // Ensure this is INSIDE the loop!
-                    }
-
-                    if (found)
-                    {
-                        File.WriteAllLines(filePath, remainingStudents);
-                        MessageBox.Show($"Student {targetId} suspended successfully.");
-                        txtStudentId.Clear();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Student ID not found.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
-        }
-
-        private void btnOrganizerSearch_Click(object sender, EventArgs e)
-        {
-            string targetId = txtOrganizerSearch.Text.Trim();
-            string filePath = "Organizers.txt"; // From your Debug folder
-
-            // Clear the grid before showing new results
-            guna2DataGridView1.Rows.Clear();
-
-            if (File.Exists(filePath))
-            {
-                string[] lines = File.ReadAllLines(filePath);
-                bool found = false;
-
-                foreach (string line in lines)
-                {
-                    string[] data = line.Split(',');
-                    // If search is empty, show all. If ID matches, show that specific one.
-                    if (string.IsNullOrEmpty(targetId) || data[0] == targetId)
-                    {
-                        // Ensure indices match your Columns: ID, Name, Email, Phone, Status
-                        guna2DataGridView1.Rows.Add(data[0], data[1], data[2], data[3], data[4]);
-                        found = true;
-                    }
-                }
-
-                if (!found) MessageBox.Show("No matching Organizer found.");
-            }
-            else
-            {
-                MessageBox.Show("Organizer database file missing.");
-            }
-        }
-
-        private void btnVolunteerSearch_Click(object sender, EventArgs e)
-        {
-            string targetId = txtOrganizerSearch.Text.Trim();
-            string filePath = "Organizers.txt"; // From your Debug folder
-
-            // Clear the grid before showing new results
-            guna2DataGridView1.Rows.Clear();
-
-            if (File.Exists(filePath))
-            {
-                string[] lines = File.ReadAllLines(filePath);
-                bool found = false;
-
-                foreach (string line in lines)
-                {
-                    string[] data = line.Split(',');
-                    // If search is empty, show all. If ID matches, show that specific one.
-                    if (string.IsNullOrEmpty(targetId) || data[0] == targetId)
-                    {
-                        // Ensure indices match your Columns: ID, Name, Email, Phone, Status
-                        guna2DataGridView1.Rows.Add(data[0], data[1], data[2], data[3], data[4]);
-                        found = true;
-                    }
-                }
-
-                if (!found) MessageBox.Show("No matching Organizer found.");
-            }
-            else
-            {
-                MessageBox.Show("Organizer database file missing.");
-            }
-        }
-
-        private void btnStudentSearch_Click(object sender, EventArgs e)
-        {
-            string targetId = txtOrganizerSearch.Text.Trim();
-            string filePath = "Organizers.txt"; // From your Debug folder
-
-            // Clear the grid before showing new results
-            guna2DataGridView1.Rows.Clear();
-
-            if (File.Exists(filePath))
-            {
-                string[] lines = File.ReadAllLines(filePath);
-                bool found = false;
-
-                foreach (string line in lines)
-                {
-                    string[] data = line.Split(',');
-                    // If search is empty, show all. If ID matches, show that specific one.
-                    if (string.IsNullOrEmpty(targetId) || data[0] == targetId)
-                    {
-                        // Ensure indices match your Columns: ID, Name, Email, Phone, Status
-                        guna2DataGridView1.Rows.Add(data[0], data[1], data[2], data[3], data[4]);
-                        found = true;
-                    }
-                }
-
-                if (!found) MessageBox.Show("No matching Organizer found.");
-            }
-            else
-            {
-                MessageBox.Show("Organizer database file missing.");
-            }
-        }
-
-        private void guna2DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtVolunteerReason_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

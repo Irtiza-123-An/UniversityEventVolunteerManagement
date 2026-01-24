@@ -1,47 +1,60 @@
 using System.Drawing;
 using UniversityEventVolunteerManagement.Services;
+using UniversityEventVolunteerManagement.Backend.Services;
+using BackendUserService = UniversityEventVolunteerManagement.Backend.Services.UserService;
 
 namespace UniversityEventVolunteerManagement
 {
     public partial class LoginForm : Form
     {
+        private readonly BackendUserService _userService;
+
         public LoginForm()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-
+            _userService = new BackendUserService();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
             this.BackgroundImageLayout = ImageLayout.Stretch;
-           
+
         }
 
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // These credentials should eventually be checked against your File System
-            if (txtUsername.Text == "admin" && txtPassword.Text == "123")
-            {
-                new AdminForm().Show();
-                this.Hide();
-            }
-            else if (txtUsername.Text == "organizer" && txtPassword.Text == "1234")
-            {
-                // Opens the Organizer Dashboard you designed
-                new OrganizerForm().Show();
-                this.Hide();
-            }
-            else if (txtUsername.Text == "volunteer" && txtPassword.Text == "12345")
-            {
-                new VolunteerForm().Show();
-                this.Hide();
-            }
-            else
+            // Authenticate using backend service
+            var user = _userService.Login(txtUsername.Text, txtPassword.Text);
+
+            if (user == null)
             {
                 MessageBox.Show("Invalid Login Credentials", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            // Route to appropriate form based on role
+            Form nextForm;
+            switch (user.Role)
+            {
+                case "Admin":
+                    nextForm = new AdminForm();
+                    break;
+                case "Organizer":
+                    nextForm = new OrganizerForm();
+                    break;
+                case "Volunteer":
+                    nextForm = new VolunteerForm();
+                    break;
+                default:
+                    MessageBox.Show("Invalid user role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+            }
+
+            nextForm.FormClosed += (s, args) => this.Show();
+            nextForm.Show();
+            this.Hide();
         }
 
         private void lblTitle_Click(object sender, EventArgs e)
@@ -52,7 +65,8 @@ namespace UniversityEventVolunteerManagement
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Volreg registerScreen = new Volreg();
-            registerScreen.Show(); // This opens the new window
+            registerScreen.FormClosed += (s, args) => this.Show();
+            registerScreen.Show();
             this.Hide();
         }
 
