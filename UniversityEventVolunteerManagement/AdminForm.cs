@@ -41,7 +41,7 @@ namespace UniversityEventVolunteerManagement
             // Capture data from the textboxes in your Designer
             string fullName = txtFullName.Text; // Maps to Username or Eo_id context
             string email = txtEmail.Text;       // Eo_email
-            string phone = txtPhone.Text;       // Eo_phone
+            string phone = txtPhoneNumber.Text;       // Eo_phone
             string password = txtPassword.Text; // Eo_pass
 
             // Simple validation to ensure no empty fields
@@ -66,7 +66,7 @@ namespace UniversityEventVolunteerManagement
                 // Clear fields after successful save
                 txtFullName.Clear();
                 txtEmail.Clear();
-                txtPhone.Clear();
+                txtPhoneNumber.Clear();
                 txtPassword.Clear();
             }
             catch (Exception ex)
