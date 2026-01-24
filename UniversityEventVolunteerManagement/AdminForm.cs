@@ -437,5 +437,15 @@ namespace UniversityEventVolunteerManagement
                 MessageBox.Show("Organizer database file missing.");
             }
         }
+
+        private void guna2DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
