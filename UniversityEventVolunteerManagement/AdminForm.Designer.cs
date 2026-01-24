@@ -657,11 +657,12 @@
             // 
             // txtVolunteerReason
             // 
-            txtVolunteerReason.Location = new Point(474, 401);
+            txtVolunteerReason.Location = new Point(478, 401);
             txtVolunteerReason.Margin = new Padding(3, 4, 3, 4);
             txtVolunteerReason.Name = "txtVolunteerReason";
             txtVolunteerReason.Size = new Size(164, 27);
             txtVolunteerReason.TabIndex = 29;
+            txtVolunteerReason.TextChanged += txtVolunteerReason_TextChanged;
             // 
             // label9
             // 
@@ -794,7 +795,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            label10.Location = new Point(117, 479);
+            label10.Location = new Point(108, 472);
             label10.Name = "label10";
             label10.Size = new Size(70, 23);
             label10.TabIndex = 24;
@@ -871,7 +872,7 @@
             label13.AutoSize = true;
             label13.BackColor = Color.Transparent;
             label13.Font = new Font("Times New Roman", 12F, FontStyle.Bold);
-            label13.Location = new Point(133, 488);
+            label13.Location = new Point(134, 481);
             label13.Name = "label13";
             label13.Size = new Size(70, 23);
             label13.TabIndex = 31;
@@ -1038,7 +1039,7 @@
             btnStudentSuspend.FillColor = Color.Black;
             btnStudentSuspend.Font = new Font("Segoe UI", 9F);
             btnStudentSuspend.ForeColor = Color.White;
-            btnStudentSuspend.Location = new Point(523, 469);
+            btnStudentSuspend.Location = new Point(551, 464);
             btnStudentSuspend.Name = "btnStudentSuspend";
             btnStudentSuspend.ShadowDecoration.CustomizableEdges = customizableEdges22;
             btnStudentSuspend.Size = new Size(103, 40);
