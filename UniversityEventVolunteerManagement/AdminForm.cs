@@ -201,5 +201,10 @@ namespace UniversityEventVolunteerManagement
                 }
             }
         }
+
+        private void guna2DataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
