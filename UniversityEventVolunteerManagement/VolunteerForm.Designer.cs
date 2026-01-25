@@ -406,7 +406,7 @@
             txtPhoneNumber.Font = new Font("Segoe UI", 9F);
             txtPhoneNumber.ForeColor = Color.Black;
             txtPhoneNumber.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            txtPhoneNumber.Location = new Point(184, 199);
+            txtPhoneNumber.Location = new Point(192, 199);
             txtPhoneNumber.Margin = new Padding(3, 5, 3, 5);
             txtPhoneNumber.Name = "txtPhoneNumber";
             txtPhoneNumber.PlaceholderForeColor = Color.Black;
